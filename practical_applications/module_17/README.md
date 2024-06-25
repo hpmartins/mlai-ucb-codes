@@ -2,7 +2,7 @@
 
 This is a comparison of the performance of different classifiers using a dataset from a Portuguese marketing  campaign related with bank deposit subscription. The data is available [here](https://archive.ics.uci.edu/dataset/222/bank+marketing) at the [UCI Machine Learning Repository](https://archive.ics.uci.edu/).
 
-All code is in [this notebook](link to the notebook) in this repository.
+All code is in [this notebook](https://github.com/hpmartins/mlai-ucb-codes/blob/main/practical_applications/module_17/module_17_application.ipynb) in this repository.
 
 ## Findings
 
