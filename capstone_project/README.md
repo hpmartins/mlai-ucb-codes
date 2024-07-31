@@ -4,6 +4,8 @@
 
 ### Executive summary
 
+This summary is supported by this PDF presentation: [hdma_slides.pdf]
+
 ### Rationale
 
 Understanding the factors that lead to home mortgage approval or denial is crucial for both borrowers and lenders. For borrowers, it can help them discover their eligibility. For lenders, it can improve risk assessment, make the application process faster, and potentially identify areas where lending practices may need to be adjusted to ensure fairness. Additionally, policymakers and researchers can utilize these insights to address systemic issues and promote equitable access to homeownership.
@@ -29,7 +31,7 @@ I used the [U.S. Home Mortgage Disclosure Act (HMDA) database] as the source of 
 - As fetched the data contains 616388 rows and 99 columns.
 - All features are mapped into either numbers or categories, converting their values using the data documentation and grouping them into a new value whenever reasonable.
 - Some features are pre-filtered due to outliers.
-- All missing values are dealt with.
+- All missing values are dealt with; categorical unknowns with very few samples are dropped.
 - Output of this step are 549263 rows and 38 columns.
 
 #### 2. Data analysis <small>([file_2_analysis.ipynb])</small>
@@ -48,22 +50,22 @@ I used the [U.S. Home Mortgage Disclosure Act (HMDA) database] as the source of 
 
 ##### 3.1. Performances
 
-Here are the main metrics for all trained models:
+The data set has some imbalance, with 34%/66% distribution of the target feature (application outcome). For this reason, both precision and recall were tracked for all models. Classification reports and confusion matrix plots are also available in the notebooks. Here are the main metrics for all trained models:
 
 | Model | Train score | Test score | Precision  | Precision | Precision  | Recall   |
 | :---: | :---------: | :--------: | :--------: | :-------: | :--------: | :------: |
 |       |             |            | *Approved* | *Denied*  | *Approved* | *Denied* |
 | DummyClassifier      | 0.658 | \-    | \-   | \-   | \-   | \-   |
 | LogisticRegression   | 0.770 | 0.773 | 0.77 | 0.78 | 0.93 | 0.46 |
-| Decision Tree        | 0.796 | 0.798 | 0.79 | 0.81 | 0.93 | 0.54 |
+| Decision Tree        | 0.800 | 0.799 | 0.80 | 0.80 | 0.93 | 0.55 |
 | Support Vector       | 0.786 | 0.788 | 0.79 | 0.79 | 0.93 | 0.51 |
-| HistGradientBoosting | 0.740 | 0.743 | 0.80 | 0.82 | 0.94 | 0.55 |
-| AdaBoost             | 0.785 | 0.788 | 0.77 | 0.85 | 0.96 | 0.46 |
 | Random Forest        | 0.798 | 0.797 | 0.78 | 0.86 | 0.96 | 0.49 |
-| **XGBoost**          | **0.808** | **0.804** | **0.80** | **0.83** | **0.94** | **0.53** |
-| Neural Network       | 0.797 | 0.802 | 0.80 | 0.81 | 0.93 | 0.55 |
+| HistGradientBoosting | 0.751 | 0.744 | 0.80 | 0.82 | 0.94 | 0.56 |
+| AdaBoost             | 0.785 | 0.788 | 0.77 | 0.85 | 0.96 | 0.46 |
+| **XGBoost**          | **0.807** | **0.803** | **0.79** | **0.87** | **0.96** | **0.50** |
+| Neural Network       | 0.797 | 0.802 | 0.80 | 0.79 | 0.92 | 0.57 |
 
-The XGBoost is the model that seemed to perform better overall at classifying the outcome of the applications. Here is the feature importances according to the XGBoost model:
+The XGBoost is the model that seemed to perform better overall at classifying the outcome of the applications. More details such as the ROC curve can be seen in the notebook (end of [file_3A_modeling-classifiers.ipynb]) or in the presentation ([hdma_slides.pdf]). Here are the feature importances according to the XGBoost model:
 
 <img src="images/models-feat_importance.png" width=600>
 
